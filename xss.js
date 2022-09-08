@@ -1,1 +1,1 @@
-<script>alert("xss");</script>
+javascript:alert("xss")
