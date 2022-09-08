@@ -1,1 +1,1 @@
-<?php e "welcome to my site!";?>
+<?php echo "welcome to my site!";?>
