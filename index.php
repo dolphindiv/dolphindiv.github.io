@@ -1,1 +1,1 @@
-<?php ench "welcome to my site!";?>
+<?php e "welcome to my site!";?>
