@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost_Hacker // 个人空间</title>
+    <style>
+        :root {
+            --hacker-green: #00ff00;
+            --matrix-green: #20C20E;
+            --terminal-bg: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background-color: var(--terminal-bg);
+            color: var(--matrix-green);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 终端头部 */
+        .terminal-header {
+            padding: 1rem;
+            border-bottom: 3px solid var(--hacker-green);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: var(--terminal-bg);
+            z-index: 1000;
+        }
+
+        .glitch-text {
+            animation: glitch 2s infinite;
+            text-shadow: 0.05em 0 0 rgba(255,0,0,.75),
+                        -0.05em -0.025em 0 rgba(0,255,0,.75),
+                        0.025em 0.05em 0 rgba(0,0,255,.75);
+        }
+
+        /* 主内容区 */
+        .container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 命令行界面样式 */
+        .terminal {
+            border: 1px solid var(--hacker-green);
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 0 15px var(--hacker-green);
+        }
+
+        .prompt {
+            color: var(--hacker-green);
+        }
+
+        .prompt::after {
+            content: "_";
+            animation: blink 1s infinite;
+        }
+
+        /* 技能进度条 */
+        .skill-bar {
+            background: #003300;
+            height: 20px;
+            border: 1px solid var(--hacker-green);
+            margin: 10px 0;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--hacker-green);
+            transition: width 2s;
+        }
+
+        /* 动画效果 */
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .terminal {
+                margin: 10px 0;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="terminal-header">
+        <h1 class="glitch-text">root@ghost-hacker:~#</h1>
+        <nav>
+            <a href="#about" class="prompt">[about.txt]</a>
+            <a href="#skills" class="prompt">[skills.md]</a>
+            <a href="#contact" class="prompt">[contact.sh]</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="about" class="terminal">
+            <div class="prompt">$ cat about.txt</div>
+            <p>> 姓名: [已加密]</p>
+            <p>> 代号: Ghost_Hacker</p>
+            <p>> 隶属组织: 数字黎明</p>
+            <p>> 专长: 网络安全 | 渗透测试 | 逆向工程</p>
+        </section>
+
+        <section id="skills" class="terminal">
+            <div class="prompt">$ nano skills.md</div>
+            <p>## 核心能力</p>
+            <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%">Python 90%</div>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%">网络安全 85%</div>
+            </div>
+        </section>
+
+        <section id="contact" class="terminal">
+            <div class="prompt">$ ./contact.sh</div>
+            <p>> GPG密钥: [点击显示]</p>
+            <p>> 暗网邮箱: ghost@secmail.drk</p>
+            <p>> 信号站: [加密通道]</p>
+        </section>
+    </div>
+
+    <script>
+        // 添加终端输入效果
+        document.querySelectorAll('.prompt').forEach(el => {
+            const text = el.textContent;
+            el.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    el.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        });
+
+        // 进度条动画
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.skill-progress').forEach(bar => {
+                bar.style.width = bar.style.width;
+            });
+        });
+    </script>
+</body>
+</html>
