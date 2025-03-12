@@ -17,11 +17,11 @@
     iframe.onload = () => {
       try {
         // Attempt to access sensitive features through the iframe
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-          .then((stream) => {
-            console.log('Successfully accessed camera and microphone!');
+       // navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        //  .then((stream) => {
+        //    console.log('Successfully accessed camera and microphone!');
             // Do something malicious with the stream, e.g., record audio/video
-          })
+        //  })
           .catch((error) => {
             console.error('Failed to access camera/microphone:', error.message);
           });
